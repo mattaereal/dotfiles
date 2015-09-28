@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in /home/matt/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="../../custom/themes/mattlips"
+ZSH_THEME="mattlips"
 DISABLE_AUTO_UPDATE="true"
 plugins=(git zsh-syntax-highlighting)
 
