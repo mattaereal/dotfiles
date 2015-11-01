@@ -76,10 +76,10 @@ function ff() { find . -type f -iname '*'$*'*' -ls ; }
 function getWebsiteTitle() {
     if [ "$#" -eq 1 ] ; then
         content=$(wget $1 -q -O -); echo $content | awk -vRS="</title>" '/<title>/{gsub(/.*<title>|\n+/,"");print;exit}' -
-    fi    
+    fi
 }
 
-# UTILS  
+# UTILS
 #ldapsearch -LLL -H ldap://activedirectory.example.com:389 -b 'dc=example,dc=com' -D 'DOMAIN\Joe.Bloggs' -w 'p@ssw0rd' '(sAMAccountName=joe.bloggs)'
 
 function ffxhist() {
@@ -106,7 +106,7 @@ Usage: fstr [-i] \"pattern\" [\"filename pattern\"] "
         return;
     fi
     find . -type f -name "${2:-*}" -print0 | \
-    xargs -0 egrep --color=always -sn ${case} "$1" 2>&- | more 
+    xargs -0 egrep --color=always -sn ${case} "$1" 2>&- | more
 
 }
 
@@ -274,5 +274,8 @@ set backupdir=./.backup,.,/tmp
 set directory^=$HOME/.vim_swap//
 export HISTSIZE=2500
 export EDITOR=vim
+export SCRIPTS_FOLDER="/home/matt/Documents/scripts/"
+export PATH=$PATH:$SCRIPTS_FOLDER
+
 
 if [ -z "$TMUX" ]; then tmux; fi
