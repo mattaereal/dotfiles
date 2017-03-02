@@ -57,7 +57,8 @@ alias recordDesktop='ffmpeg -f alsa -i pulse -f x11grab -s 1920x1080 -r 30 -i :0
 alias k9='kill -9'
 alias ka='killall'
 
-alias xflux_tandil='xflux -l -37.3195228 -g -59.1427021'
+alias tandil_xflux='xflux -l -37.3195228 -g -59.1427021'
+alias tandil_weather='curl http://wttr.in/tandil'
 
 # tmux
 alias tmux='TERM=xterm-256color tmux -u'
@@ -65,6 +66,8 @@ alias tmn='tmux new-session'
 alias tma='tmux attach -t'
 alias tmls='tmux list-sessions'
 alias tmrm='tmux kill-session -t'
+
+eval $(thefuck --alias)
 
 function quickUpload() { if [ $# -eq 2 ];then curl --upload-file $1 https://transfer.sh/$2; fi }
 
@@ -266,16 +269,17 @@ function imgurlast() {
   imgurbash.sh "$(ls -ltr | tail -n 1 | awk {'print $9" "$10" "$11" "$12'})"
 }
 
+#function nowhois () { lynx -dump https://www.iana.org/whois\?q\=( | sed -n "/% IANA WHOIS server/,/source:       IANA/p";} )
 
 #------------------
 # Useful exports
 #------------------
-set backupdir=./.backup,.,/tmp
-set directory^=$HOME/.vim_swap//
+# set backupdir=./.backup,.,/tmp
+# set directory^=$HOME/.vim_swap//
 export HISTSIZE=2500
 export EDITOR=vim
 export SCRIPTS_FOLDER="/home/matt/Documents/scripts/"
 export PATH=$PATH:$SCRIPTS_FOLDER
-
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd' #on, lcd, gasp
 
 if [ -z "$TMUX" ]; then tmux; fi
