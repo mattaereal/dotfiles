@@ -2,3 +2,6 @@
       path = .gitconfig-aereal
 [includeIf "gitdir:~/Documents/isr"]
       path = .gitconfig-isr
+[user]
+	name = Matías Aereal Aeón
+	email = aereal@gmail.com
