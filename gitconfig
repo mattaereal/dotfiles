@@ -1,5 +1,4 @@
-[user]
-	email = mre@infobytesec.com
-	name = Matías A. Ré Medina
-[push]
-    default = upstream
+[includeIf "gitdir:~/.dotfiles"]
+      path = .gitconfig-aereal
+[includeIf "gitdir:~/Documents/isr"]
+      path = .gitconfig-isr

@@ -1,3 +1,17 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=2000
+SAVEHIST=10000
+setopt appendhistory beep extendedglob nomatch notify
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/matt/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -8,6 +22,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="mattlips"
 DISABLE_AUTO_UPDATE="true"
 plugins=(git zsh-syntax-highlighting)
+
 
 source $ZSH/oh-my-zsh.sh
 
@@ -53,12 +68,14 @@ alias myip="wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | c
 alias nivelesPrima='curl http://24.232.0.118/asp/nivelesPrima.asp | grep "valor" | grep "dB" | cut -d ">" -f2 | cut -d "<" -f1'
 
 
-alias recordDesktop='ffmpeg -f alsa -i pulse -f x11grab -s 1920x1080 -r 30 -i :0.0 -qscale:v 0 -qscale:a 0 '
+alias recordDesktop='ffmpeg -f alsa -i pulse -f x11grab -s 3200x1800 -r 30 -i :0.0 -qscale:v 0 -qscale:a 0 '
 alias k9='kill -9'
 alias ka='killall'
 
 alias tandil_xflux='xflux -l -37.3195228 -g -59.1427021'
 alias tandil_weather='curl http://wttr.in/tandil'
+
+alias tcli='transmission-cli -w ~/Videos -D'
 
 # tmux
 alias tmux='TERM=xterm-256color tmux -u'
@@ -276,7 +293,6 @@ function imgurlast() {
 #------------------
 # set backupdir=./.backup,.,/tmp
 # set directory^=$HOME/.vim_swap//
-export HISTSIZE=2500
 export EDITOR=vim
 export SCRIPTS_FOLDER="/home/matt/Documents/scripts/"
 export PATH=$PATH:$SCRIPTS_FOLDER
