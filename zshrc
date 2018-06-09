@@ -293,9 +293,16 @@ function imgurlast() {
 #------------------
 # set backupdir=./.backup,.,/tmp
 # set directory^=$HOME/.vim_swap//
+NPM_PACKAGES="${HOME}/.npm-packages"
 export EDITOR=vim
 export SCRIPTS_FOLDER="/home/matt/Documents/scripts/"
-export PATH=$PATH:$SCRIPTS_FOLDER
+export AUDITS_FOLDER="~/Documents/work/security/mfsec/audits"
+export PATH=$PATH:$SCRIPTS_FOLDER:$NPM_PACKAGES/bin
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd' #on, lcd, gasp
+
+# Unset manpath so we can inherit from /etc/manpath via the `manpath` command
+unset MANPATH # delete if you already modified MANPATH elsewhere in your config
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
 
 if [ -z "$TMUX" ]; then tmux; fi
