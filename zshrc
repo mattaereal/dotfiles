@@ -30,7 +30,6 @@ source $ZSH/oh-my-zsh.sh
 zstyle ':completion:*' special-dirs ..
 
 # Customize to your needs...
-
 export DISABLE_AUTO_TITLE=true
 export TMOUT=0
 
@@ -86,8 +85,6 @@ alias tmrm='tmux kill-session -t'
 
 eval $(thefuck --alias)
 
-function quickUpload() { if [ $# -eq 2 ];then curl --upload-file $1 https://transfer.sh/$2; fi }
-
 function del() { mv $1 ~/.local/share/Trash/files/; }
 
 # Find a file with a pattern in name:
@@ -130,11 +127,6 @@ Usage: fstr [-i] \"pattern\" [\"filename pattern\"] "
 
 }
 
-function pantallazo() {
-    scrot '/home/matt/screenshots/%Y-%m-%d_$wx$h_scrot.png' -d 3 -e 'imgurbash.sh $f'
-
-}
-
 function normalizeFiles() {
     if [ "$#" -lt 2 ]; then
         echo "normalizeFiles .current_extension .new_extension"
@@ -142,22 +134,6 @@ function normalizeFiles() {
     else
         j=0
         for i in *.$1; do let j+=1 ;mv $i archivo$j.$2 ; done
-    fi
-}
-
-
-function compress_file()
-{
-    if [ -f $1 ] ; then
-        tar -czf $1.tar.gz $1
-    fi
-
-}
-
-function compress_folder()
-{
-    if [ -d $1 ] ; then
-        tar -czf $1.tar.gz $1
     fi
 }
 
@@ -191,7 +167,15 @@ function extract_ips() {
     fi
 }
 
-function my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command ; }
+function myps() { ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command ; }
+
+function vbox_getip() {
+	VBoxManage guestproperty enumerate $1 | grep "IP, value:" | awk {'print $4'} | sed 's/,$//'
+}
+
+function vbox_startheadless() {
+	vboxmanage startvm $1 --type headless
+}
 
 function ii()   # Get current host related info.
 {
@@ -208,7 +192,7 @@ function ii()   # Get current host related info.
     echo
 }
 
-function matt_sort() {
+function awksort() {
     if [ -f $1 ] ; then
         awk ' !x[$0]++' $1
     else
@@ -219,27 +203,6 @@ function matt_sort() {
 function wiki() {
         dig +short txt $1.wp.dg.cx
 
-}
-
-function extractWPAHandshake() {
-    if [ "$#" -eq 1 ] && [ -f $1 ] ; then
-        sudo tshark -r $1 -2 -R "eapol || wlan.fc.type_subtype == 0x08" -w $1_handshakes.cap
-
-    else
-        echo "Usage: extractWPAHandshake captura.cap"
-        echo "Check for captura_handshakes.cap later."
-    fi
-}
-
-function getEnglishPronunciation() {
-    if [ "$#" -gt 0 ]; then
-        for word in "$@"
-        do
-            curl -A "Mozilla" "http://translate.google.com/translate_tts?tl=en&q="${word} | cvlc --play-and-exit -
-        done
-    else
-        echo getEnglishPronunciation "hello there"
-    fi
 }
 
 function getInternalIp() {
@@ -282,12 +245,6 @@ function karaoketize() {
     fi
 }
 
-function imgurlast() {
-  imgurbash.sh "$(ls -ltr | tail -n 1 | awk {'print $9" "$10" "$11" "$12'})"
-}
-
-#function nowhois () { lynx -dump https://www.iana.org/whois\?q\=( | sed -n "/% IANA WHOIS server/,/source:       IANA/p";} )
-
 #------------------
 # Useful exports
 #------------------
@@ -295,9 +252,8 @@ function imgurlast() {
 # set directory^=$HOME/.vim_swap//
 NPM_PACKAGES="${HOME}/.npm-packages"
 export EDITOR=vim
-export SCRIPTS_FOLDER="/home/matt/Documents/scripts/"
-export AUDITS_FOLDER="~/Documents/work/security/mfsec/audits"
-export PATH=$PATH:$SCRIPTS_FOLDER:$NPM_PACKAGES/bin
+export GOPATH="/home/matt/.go"
+export PATH=$PATH::$NPM_PACKAGES/bin:$GOPATH/bin
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd' #on, lcd, gasp
 
 # Unset manpath so we can inherit from /etc/manpath via the `manpath` command
